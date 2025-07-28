@@ -1,6 +1,7 @@
 import accounts from './data.js';
+import { containerMovements } from './elements.js';
 
-const transactions = accounts.movement;
+const transactions = accounts.movements;
 export const displayMovements = transactions => {
   containerMovements.innerHTML = '';
   transactions.forEach((movement, index) => {

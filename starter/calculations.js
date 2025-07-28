@@ -1,3 +1,10 @@
+import {
+  labelBalance,
+  labelSumIn,
+  labelSumOut,
+  labelSumInterest,
+} from './elements.js';
+
 export const calculateDisplayBalance = account => {
   account.balance = account.movements.reduce(
     (account, movement) => account + movement,
