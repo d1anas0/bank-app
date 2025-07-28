@@ -43,9 +43,9 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Get Usernames
 
-const createUsernames = account => {
+const createUsernames = accounts => {
   // usernames = initials only, in lower case
-  account.forEach(account => {
+  accounts.forEach(account => {
     account.username = account.owner
       .toLowerCase()
       .split(' ')
