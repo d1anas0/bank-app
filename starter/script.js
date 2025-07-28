@@ -1,8 +1,13 @@
 'use strict';
 
-import accounts from './data.js';
-
 // BANKIST APP
+
+import accounts from './data.js';
+import {
+  calculateDisplayBalance,
+  calcDisplaySummaries,
+} from './calculations.js';
+import { displayMovements } from './transactionsList.js';
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -85,92 +90,6 @@ btnLogin.addEventListener('click', e => {
   updateUI();
 });
 
-// Transactions
-const displayMovements = transactions => {
-  containerMovements.innerHTML = '';
-  transactions.forEach((movement, index) => {
-    const typeOfMovement = movement < 1 ? 'withdrawal' : 'deposit';
-    const renderThis = `<div class="movements__row">
-          <div class="movements__type movements__type--${typeOfMovement}">${
-      index + 1
-    } ${typeOfMovement}</div>
-          <div class="movements__value">${movement}€</div>
-        </div>`;
-
-    containerMovements.insertAdjacentHTML('afterbegin', renderThis);
-  });
-};
-
-// Display Balance - my attempt
-// let currentAccountBalance;
-// const calculateDisplayBalance = accountMovements => {
-//   currentAccountBalance = accountMovements.reduce((acc, cur, i, arr) => {
-//     return acc + cur;
-//   }, 0);
-
-//   console.log('display balance 1', currentAccountBalance);
-//   labelBalance.textContent = `${currentAccountBalance} €`;
-//   return currentAccountBalance;
-// };
-
-// Display Balance - instructor
-// >>>>> Your instructor’s implementation is preferable for real-world applications. It keeps state local to the account object, avoids unnecessary globals, and makes your code easier to reason about and maintain. Your intuition is correct—encapsulation helps prevent bugs and makes your code more scalable! <<<<<
-const calculateDisplayBalance = account => {
-  account.balance = account.movements.reduce(
-    (account, movement) => account + movement,
-    0
-  );
-  labelBalance.textContent = `${account.balance} €`;
-  console.log('calculated display balance', account.balance);
-  return account.balance;
-};
-
-// // find MAX transaction
-// const findMaxTransaction = accountMovement.reduce(
-//   (acc, mov) => (acc > mov ? acc : mov),
-//   accountMovement[0]
-// );
-// console.log('max', findMaxTransaction);
-
-// SUMMARIES
-
-const calcDisplaySummaries = transactions => {
-  // Deposit summary - my attempt
-  // const totalDeposits = transactions.movements.reduce(
-  //   (acc, mov) => (mov > 0 ? (acc += mov) : acc),
-  //   0
-  // );
-  // console.log('totalDeposits', totalDeposits);
-  // labelSumIn.textContent = `${totalDeposits}€`;
-
-  // Deposit summary - instructor implementation
-  const incomes = transactions.movements
-    .filter(mov => mov > 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  console.log('totalDeposits (instructor) - ', incomes);
-  labelSumIn.textContent = `${incomes}€`;
-
-  // Withdrawal summary
-  const totalWithdrawals = transactions.movements.reduce(
-    (acc, mov) => (mov < 0 ? (acc += mov) : acc),
-    0
-  );
-  console.log('totalWithdrawals', totalWithdrawals);
-  labelSumOut.textContent = `${Math.abs(totalWithdrawals)}€`;
-
-  // Interest
-
-  const interest = transactions.movements
-    .filter(mov => mov > 0)
-    .map(deposit => (deposit * transactions.interestRate) / 100)
-    .filter((int, i, arr) => {
-      return int >= 1;
-    })
-    .reduce((acc, int) => acc + int, 0);
-  console.log('interest', interest);
-  labelSumInterest.textContent = `${interest}€`;
-};
-
 // UPDATE UI
 const updateUI = () => {
   calculateDisplayBalance(currentAccount);
@@ -183,18 +102,14 @@ const updateUI = () => {
 btnTransfer.addEventListener('click', e => {
   e.preventDefault();
 
+  let currentAccountTransactions = currentAccount.movements;
+  let receiverAccountTransactions = recipient.movements;
   const transferAmount = Number(inputTransferAmount.value);
+
   const recipient = accounts.find(
     account => inputTransferTo.value === account.username
   );
-  console.log('recipient', recipient, transferAmount);
 
-  let currentAccountTransactions = currentAccount.movements;
-  let receiverAccountTransactions = recipient.movements;
-
-  // // for my implementation of calculateDisplayBalance()
-  // const senderBalance = currentAccountBalance;
-  // // for instructors implementation of calculateDisplayBalance()
   const senderBalance = currentAccount.balance;
 
   const meetsTransferCriteria =
@@ -205,7 +120,10 @@ btnTransfer.addEventListener('click', e => {
 
   if (meetsTransferCriteria) {
     currentAccountTransactions.push(-transferAmount);
+    console.log('transactions - sender', currentAccountTransactions);
     receiverAccountTransactions.push(transferAmount);
+    console.log('transactions - receiver', receiverAccountTransactions);
+
     updateUI();
   }
   {
@@ -214,9 +132,6 @@ btnTransfer.addEventListener('click', e => {
 
   inputTransferTo.value = '';
   inputTransferAmount.value = '';
-
-  console.log('transactions - sender', currentAccountTransactions);
-  console.log('transactions - receiver', receiverAccountTransactions);
 });
 
 // NEXT: build 'Close Account' feature (ie. remove account from the accounts array)
