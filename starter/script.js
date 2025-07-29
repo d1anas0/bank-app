@@ -12,6 +12,7 @@ import {
   labelWelcome,
   containerApp,
 } from './elements.js';
+import transferFunds from './transferFunds.js';
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -42,7 +43,6 @@ createUsernames(accounts);
 // LOG IN
 
 let currentAccount;
-console.log('currentAccount', currentAccount);
 btnLogin.addEventListener('click', e => {
   e.preventDefault();
   currentAccount = accounts.find(
@@ -56,6 +56,8 @@ btnLogin.addEventListener('click', e => {
       currentAccount.owner.split(' ')[0]
     }`;
     displayMovements(currentAccount.movements);
+    transferFunds(currentAccount);
+    console.log('transfer funds event listener registered');
   } else {
     containerApp.style.opacity = 0;
   }
@@ -66,6 +68,7 @@ btnLogin.addEventListener('click', e => {
   inputLoginPin.blur();
 
   updateUI(currentAccount);
+  console.log('currentAccount', currentAccount);
 });
 
 // NEXT: build 'Close Account' feature (ie. remove account from the accounts array)
