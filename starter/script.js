@@ -3,10 +3,7 @@
 // BANKIST APP
 
 import accounts from './data.js';
-import {
-  calculateDisplayBalance,
-  calcDisplaySummaries,
-} from './calculations.js';
+import updateUI from './updateUI.js';
 import { displayMovements } from './transactionsList.js';
 import {
   btnLogin,
@@ -14,9 +11,6 @@ import {
   inputLoginUsername,
   labelWelcome,
   containerApp,
-  inputTransferTo,
-  inputTransferAmount,
-  btnTransfer,
 } from './elements.js';
 
 /////////////////////////////////////////////////
@@ -71,51 +65,7 @@ btnLogin.addEventListener('click', e => {
   inputLoginPin.value = '';
   inputLoginPin.blur();
 
-  updateUI();
-});
-
-// UPDATE UI
-const updateUI = () => {
-  calculateDisplayBalance(currentAccount);
-  calcDisplaySummaries(currentAccount);
-  displayMovements(currentAccount.movements);
-};
-
-// TRANSFER AMOUNTS
-
-btnTransfer.addEventListener('click', e => {
-  e.preventDefault();
-
-  let currentAccountTransactions = currentAccount.movements;
-  let receiverAccountTransactions = recipient.movements;
-  const transferAmount = Number(inputTransferAmount.value);
-
-  const recipient = accounts.find(
-    account => inputTransferTo.value === account.username
-  );
-
-  const senderBalance = currentAccount.balance;
-
-  const meetsTransferCriteria =
-    senderBalance >= transferAmount && // sender must have enough money in the account
-    transferAmount > 0 && // must be transferring 1 or more dollars
-    !!recipient && // recipient account must exist
-    recipient.username !== currentAccount.username; // must not be transferring to themselves
-
-  if (meetsTransferCriteria) {
-    currentAccountTransactions.push(-transferAmount);
-    console.log('transactions - sender', currentAccountTransactions);
-    receiverAccountTransactions.push(transferAmount);
-    console.log('transactions - receiver', receiverAccountTransactions);
-
-    updateUI();
-  }
-  {
-    console.log('Please check your inputs and try again');
-  }
-
-  inputTransferTo.value = '';
-  inputTransferAmount.value = '';
+  updateUI(currentAccount);
 });
 
 // NEXT: build 'Close Account' feature (ie. remove account from the accounts array)
