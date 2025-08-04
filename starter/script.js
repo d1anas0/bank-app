@@ -24,6 +24,9 @@ import transferFunds from './transferFunds.js';
 //   ['GBP', 'Pound sterling'],
 // ]);
 
+export let currentAccount;
+transferFunds();
+
 /////////////////////////////////////////////////
 // Get Usernames
 
@@ -42,7 +45,6 @@ createUsernames(accounts);
 
 // LOG IN
 
-let currentAccount;
 btnLogin.addEventListener('click', e => {
   e.preventDefault();
   currentAccount = accounts.find(
@@ -56,8 +58,6 @@ btnLogin.addEventListener('click', e => {
       currentAccount.owner.split(' ')[0]
     }`;
     displayMovements(currentAccount.movements);
-    transferFunds(currentAccount);
-    console.log('transfer funds event listener registered');
   } else {
     containerApp.style.opacity = 0;
   }

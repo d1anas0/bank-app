@@ -5,8 +5,9 @@ import {
   inputTransferAmount,
   inputTransferTo,
 } from './elements.js';
+import { currentAccount } from './script.js';
 
-const transferFunds = currentAccount => {
+const transferFunds = () => {
   btnTransfer.addEventListener('click', e => {
     e.preventDefault();
     const recipient = accounts.find(
