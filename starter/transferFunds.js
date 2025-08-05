@@ -1,5 +1,5 @@
-import accounts from './data.js';
-import updateUI from './updateUI.js';
+import { accounts } from './data.js';
+import { updateUI } from './updateUI.js';
 import {
   btnTransfer,
   inputTransferAmount,
@@ -7,7 +7,7 @@ import {
 } from './elements.js';
 import { currentAccount } from './script.js';
 
-const transferFunds = () => {
+export const transferFunds = () => {
   btnTransfer.addEventListener('click', e => {
     e.preventDefault();
     const recipient = accounts.find(
@@ -41,5 +41,3 @@ const transferFunds = () => {
     inputTransferAmount.value = '';
   });
 };
-
-export default transferFunds;

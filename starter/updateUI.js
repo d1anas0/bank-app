@@ -4,10 +4,8 @@ import {
 } from './calculations.js';
 import { displayMovements } from './transactionsList.js';
 
-const updateUI = currentAccount => {
+export const updateUI = currentAccount => {
   calculateDisplayBalance(currentAccount);
   calcDisplaySummaries(currentAccount);
   displayMovements(currentAccount.movements);
 };
-
-export default updateUI;

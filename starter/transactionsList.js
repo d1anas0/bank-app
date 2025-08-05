@@ -1,4 +1,4 @@
-import accounts from './data.js';
+import { accounts } from './data.js';
 import { containerMovements } from './elements.js';
 
 const transactions = accounts.movements;

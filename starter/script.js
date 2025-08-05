@@ -2,8 +2,8 @@
 
 // BANKIST APP
 
-import accounts from './data.js';
-import updateUI from './updateUI.js';
+import { accounts } from './data.js';
+import { updateUI } from './updateUI.js';
 import { displayMovements } from './transactionsList.js';
 import {
   btnLogin,
@@ -12,7 +12,8 @@ import {
   labelWelcome,
   containerApp,
 } from './elements.js';
-import transferFunds from './transferFunds.js';
+import { transferFunds } from './transferFunds.js';
+import { closeAccount } from './closeAccount.js';
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -26,18 +27,19 @@ import transferFunds from './transferFunds.js';
 
 export let currentAccount;
 transferFunds();
+closeAccount();
 
 /////////////////////////////////////////////////
 // Get Usernames
 
-const createUsernames = accounts => {
+export const createUsernames = accounts => {
   // usernames = initials only, in lower case
   accounts.forEach(account => {
-    account.username = account.owner
+    return (account.username = account.owner
       .toLowerCase()
       .split(' ')
       .map(name => name[0])
-      .join('');
+      .join(''));
     console.log(account.username);
   });
 };
