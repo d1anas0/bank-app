@@ -1,11 +1,11 @@
 import {
   calculateDisplayBalance,
   calcDisplaySummaries,
-} from './calculations.js';
-import { displayMovements } from './transactionsList.js';
+} from '../utils/calculations.js';
+import { displayTransactions } from './displayTransactions.js';
 
 export const updateUI = currentAccount => {
   calculateDisplayBalance(currentAccount);
   calcDisplaySummaries(currentAccount);
-  displayMovements(currentAccount.movements);
+  displayTransactions(currentAccount.movements);
 };

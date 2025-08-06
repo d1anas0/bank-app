@@ -1,8 +1,6 @@
-import { accounts } from './data.js';
-import { containerMovements } from './elements.js';
+import { containerMovements } from '../utils/elements.js';
 
-const transactions = accounts.movements;
-export const displayMovements = transactions => {
+export const displayTransactions = transactions => {
   containerMovements.innerHTML = '';
   transactions.forEach((movement, index) => {
     const typeOfMovement = movement < 1 ? 'withdrawal' : 'deposit';

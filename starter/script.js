@@ -2,18 +2,19 @@
 
 // BANKIST APP
 
-import { accounts } from './data.js';
-import { updateUI } from './updateUI.js';
-import { displayMovements } from './transactionsList.js';
+import { accounts } from './utils/data.js';
+import { updateUI } from './modules/updateUI.js';
+import { displayTransactions } from './modules/displayTransactions.js';
 import {
   btnLogin,
   inputLoginPin,
   inputLoginUsername,
   labelWelcome,
   containerApp,
-} from './elements.js';
-import { transferFunds } from './transferFunds.js';
-import { closeAccount } from './closeAccount.js';
+} from './utils/elements.js';
+import { transferFunds } from './modules/transferFunds.js';
+// import { closeAccount } from './closeAccount.js';
+import { createUsernames } from './modules/createUsernames.js';
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -27,22 +28,9 @@ import { closeAccount } from './closeAccount.js';
 
 export let currentAccount;
 transferFunds();
-closeAccount();
 
 /////////////////////////////////////////////////
-// Get Usernames
 
-export const createUsernames = accounts => {
-  // usernames = initials only, in lower case
-  accounts.forEach(account => {
-    return (account.username = account.owner
-      .toLowerCase()
-      .split(' ')
-      .map(name => name[0])
-      .join(''));
-    console.log(account.username);
-  });
-};
 createUsernames(accounts);
 
 // LOG IN
@@ -59,7 +47,7 @@ btnLogin.addEventListener('click', e => {
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
     }`;
-    displayMovements(currentAccount.movements);
+    displayTransactions(currentAccount.movements);
   } else {
     containerApp.style.opacity = 0;
   }
@@ -74,3 +62,4 @@ btnLogin.addEventListener('click', e => {
 });
 
 // NEXT: build 'Close Account' feature (ie. remove account from the accounts array)
+// closeAccount();

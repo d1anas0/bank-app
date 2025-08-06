@@ -1,11 +1,11 @@
-import { accounts } from './data.js';
+import { accounts } from '../utils/data.js';
 import { updateUI } from './updateUI.js';
 import {
   btnTransfer,
   inputTransferAmount,
   inputTransferTo,
-} from './elements.js';
-import { currentAccount } from './script.js';
+} from '../utils/elements.js';
+import { currentAccount } from '../script.js';
 
 export const transferFunds = () => {
   btnTransfer.addEventListener('click', e => {
