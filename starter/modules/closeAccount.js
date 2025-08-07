@@ -28,7 +28,7 @@ const deleteAccount = (matchUser, matchPIN) => {
   let accountToDelete;
   matchUser === matchPIN
     ? (accountToDelete = matchUser)
-    : prompt('No such user');
+    : alert('No such user');
 
   if (accountToDelete) {
     console.log('confirmed correct user');
@@ -44,6 +44,6 @@ const deleteAccount = (matchUser, matchPIN) => {
 
     return remainingAccounts;
   } else {
-    return prompt('oops');
+    return alert('oops');
   }
 };
