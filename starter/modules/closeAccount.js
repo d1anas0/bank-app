@@ -1,27 +1,37 @@
-// import { currentAccount, createUsernames } from './script.js';
-// import { inputCloseUsername, inputClosePin, btnClose } from './elements.js';
-// import { accounts } from './data.js';
+import { currentAccount } from '../script.js';
+import {
+  inputCloseUsername,
+  inputClosePin,
+  btnClose,
+} from '../utils/elements.js';
+import { accounts } from '../utils/data.js';
 
-// createUsernames(accounts);
-// export const closeAccount = () => {
-//   btnClose?.addEventListener('click', e => {
-//     e.preventDefault();
+let accountToDelete;
 
-//     // match account username to inputCloseUsername
-//     const accountToDelete = accounts.find(
-//       account => account.username === inputCloseUsername.value
-//     );
-//     console.log('accountToDelete', accountToDelete);
+export const closeAccount = () => {
+  btnClose.addEventListener('click', e => {
+    e.preventDefault();
 
-//     // confirm PIN is correct
+    // match account username to inputCloseUsername
+    const matchUser = accounts.find(
+      account => account.username === inputCloseUsername.value
+    );
 
-//     // remove matched account from accounts array
+    // confirm PIN is correct
+    const getInputPin = Number(inputClosePin.value);
+    const matchPIN = accounts.find(account => account.pin === getInputPin);
 
-//     const remainingAccounts = accounts.filter(
-//       account => account !== currentAccount
-//     );
-//     console.log(accounts, remainingAccounts);
+    // if username AND pin matches
+    if (matchUser === matchPIN) {
+      console.log('confirmed correct user');
 
-//     // if deleting current Account should log user out
-//   });
-// };
+      // remove matched account from accounts array
+      const remainingAccounts = accounts.filter(
+        account => account !== (accountToDelete = matchUser)
+      );
+      console.log(remainingAccounts);
+    } else {
+      prompt('oops');
+    }
+  });
+};

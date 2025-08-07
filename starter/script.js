@@ -13,8 +13,8 @@ import {
   containerApp,
 } from './utils/elements.js';
 import { transferFunds } from './modules/transferFunds.js';
-// import { closeAccount } from './closeAccount.js';
 import { createUsernames } from './modules/createUsernames.js';
+import { closeAccount } from './modules/closeAccount.js';
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -32,6 +32,7 @@ transferFunds();
 /////////////////////////////////////////////////
 
 createUsernames(accounts);
+closeAccount();
 
 // LOG IN
 
