@@ -6,8 +6,6 @@ import {
 } from '../utils/elements.js';
 import { accounts } from '../utils/data.js';
 
-let accountToDelete;
-
 export const closeAccount = () => {
   btnClose.addEventListener('click', e => {
     e.preventDefault();
@@ -21,17 +19,27 @@ export const closeAccount = () => {
     const getInputPin = Number(inputClosePin.value);
     const matchPIN = accounts.find(account => account.pin === getInputPin);
 
-    // if username AND pin matches
-    if (matchUser === matchPIN) {
-      console.log('confirmed correct user');
-
-      // remove matched account from accounts array
-      const remainingAccounts = accounts.filter(
-        account => account !== (accountToDelete = matchUser)
-      );
-      console.log(remainingAccounts);
-    } else {
-      prompt('oops');
-    }
+    deleteAccount(matchUser, matchPIN);
   });
+};
+
+// if username AND pin matches
+const deleteAccount = (matchUser, matchPIN) => {
+  let accountToDelete;
+  matchUser === matchPIN
+    ? (accountToDelete = matchUser)
+    : prompt('No such user');
+
+  if (accountToDelete) {
+    console.log('confirmed correct user');
+
+    // remove matched account from accounts array
+    const remainingAccounts = accounts.filter(
+      account => account !== accountToDelete
+    );
+    console.log('remainingAccounts', remainingAccounts);
+    return remainingAccounts;
+  } else {
+    return prompt('oops');
+  }
 };
