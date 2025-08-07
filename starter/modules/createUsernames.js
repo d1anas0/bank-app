@@ -9,7 +9,5 @@ export const createUsernames = () => {
       .map(name => name[0])
       .join('');
   });
-
-  console.log('try', usernames);
   return usernames;
 };
