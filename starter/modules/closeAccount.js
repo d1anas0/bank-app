@@ -65,11 +65,10 @@ export const closeAccount = () => {
       console.log('Close this account:', index, [...accounts]);
       accounts.splice(index, 1);
       console.log('remaining accounts -', accounts);
-      inputCloseUsername.value = inputClosePin.value = '';
       containerApp.style.opacity = 0;
     } else {
       alert('incorrect details entered');
-      inputCloseUsername.value = inputClosePin.value = '';
     }
+    inputCloseUsername.value = inputClosePin.value = '';
   });
 };
