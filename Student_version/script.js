@@ -25,6 +25,8 @@ import { closeAccount } from './modules/closeAccount.js';
 //   ['EUR', 'Euro'],
 //   ['GBP', 'Pound sterling'],
 // ]);
+console.log('You are running the student version of this app');
+console.log(accounts);
 
 export let currentAccount;
 transferFunds();
