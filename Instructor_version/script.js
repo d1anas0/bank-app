@@ -4,7 +4,6 @@
 /////////////////////////////////////////////////
 // BANKIST APP
 console.log('You are running the instructors version of this app');
-console.log(accounts);
 
 /////////////////////////////////////////////////
 // Data
@@ -37,6 +36,7 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+console.log(accounts);
 
 /////////////////////////////////////////////////
 // Elements
