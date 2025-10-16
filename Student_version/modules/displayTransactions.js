@@ -19,7 +19,7 @@ export const displayTransactions = transactions => {
   const indexOfLastBigWithdrawal = transactions.findLastIndex((withdrawal) => withdrawal <  -500);
   console.log(`The last withdrawal2 you made was of $${Math.abs(lastBigWithdrawal)}, which was ${transactions.length - indexOfLastBigWithdrawal} ${((transactions.length - indexOfLastBigWithdrawal === 1) ? 'transaction' : 'transactions')} ago.`);
 
-  // less ideal way to implement this same 'big withdrawal' function (may not always return the LATEST big withdrawal if there are multiple withdrawals of the same value)
+  // THE LESS IDEAL way to implement this same 'big withdrawal' function (may not always return the LATEST big withdrawal if there are multiple withdrawals of the same value)
   // const indexOfLastBigWithdrawal = transactions.lastIndexOf(lastBigWithdrawal);
   // console.log(`The last withdrawal you made was of $${Math.abs(lastBigWithdrawal)}, which was ${transactions.length - indexOfLastBigWithdrawal} ${((transactions.length - indexOfLastBigWithdrawal === 1) ? 'transaction' : 'transactions')} ago.`);
 };

@@ -15,6 +15,7 @@ import {
 import { transferFunds } from './modules/transferFunds.js';
 import { createUsernames } from './modules/createUsernames.js';
 import { closeAccount } from './modules/closeAccount.js';
+import { loanRequest } from './modules/loanFunds.js';
 
 console.log('You are running the student version of this app');
 console.log(accounts);
@@ -25,6 +26,7 @@ transferFunds();
 /////////////////////////////////////////////////
 
 createUsernames(accounts);
+loanRequest()
 closeAccount();
 
 // LOG IN
