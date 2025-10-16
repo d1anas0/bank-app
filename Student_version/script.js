@@ -16,15 +16,6 @@ import { transferFunds } from './modules/transferFunds.js';
 import { createUsernames } from './modules/createUsernames.js';
 import { closeAccount } from './modules/closeAccount.js';
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-// const currencies = new Map([
-//   ['USD', 'United States dollar'],
-//   ['EUR', 'Euro'],
-//   ['GBP', 'Pound sterling'],
-// ]);
 console.log('You are running the student version of this app');
 console.log(accounts);
 
@@ -64,5 +55,4 @@ btnLogin.addEventListener('click', e => {
   console.log('currentAccount', currentAccount);
 });
 
-// NEXT: build 'Close Account' feature (ie. remove account from the accounts array)
-// closeAccount();
+

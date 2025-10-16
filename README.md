@@ -33,9 +33,7 @@ Student_version/
 │ ├── calculations.js
 │ ├── data.js
 │ └── elements.js
-└── z. other/
-├── challenges.js
-└── practice.js
+
 ```
 
 ### Structure of the original, course provided 'Instructor_version' of the 'Bankist app'
