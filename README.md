@@ -27,6 +27,7 @@ Student_version/
 │ ├── closeAccount.js
 │ ├── createUsernames.js
 │ ├── displayTransactions.js
+│ ├── loanFunds.js
 │ ├── transferFunds.js
 │ └── updateUI.js
 ├── utils/
